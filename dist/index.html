@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier des Graphes - Terra Numerica</title>
+    <link rel="icon" type="image/png" href="/assets/icon-C0OhqMvS.png">
+    
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --accent-bg: #eff6ff;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.025em;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1100px; 
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #e2e8f0;
+        }
+
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            margin: 0 0 0.75rem 0;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0 0 2rem 0;
+            flex-grow: 1;
+        }
+
+        .badge {
+            background: var(--accent-bg);
+            color: var(--primary);
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .card:hover .badge {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>L'Atelier des Graphes</h1>
+        <p>Explorez les mathématiques et l'informatique de manière ludique à travers ces expériences interactives.</p>
+    </div>
+
+    <div class="grid">
+        
+        <a href="./graph-coloring-game/index.html" class="card">
+            <div class="icon">🎨</div>
+            <h2>Coloration de Graphe</h2>
+            <p>Un défi de logique : coloriez tous les sommets sans que deux voisins partagent la même couleur.</p>
+            <div class="badge">Lancer le défi</div>
+        </a>
+
+        <a href="./graph/index.html" class="card">
+            <div class="icon">✏️</div>
+            <h2>Le Défi d'Euler</h2>
+            <p>Le célèbre casse-tête : parviendrez-vous à tracer toute la figure sans jamais lever votre crayon ?</p>
+            <div class="badge">Lancer l'énigme</div>
+        </a>
+
+        <a href="./gendarmes-voleur/docs/index.html" class="card">
+            <div class="icon">🚔</div>
+            <h2>Gendarme et Voleur</h2>
+            <p>Un jeu de poursuite stratégique : utilise les chemins du graphe pour attraper le voleur ou t'échapper !</p>
+            <div class="badge">Lancer la poursuite</div>
+        </a>
+
+    </div>
+
+    <footer>
+        Conçu pour la médiation scientifique • Terra Numerica
+    </footer>
+
+</body>
+</html>
