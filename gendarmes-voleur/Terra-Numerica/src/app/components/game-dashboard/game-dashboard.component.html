@@ -1,0 +1,63 @@
+<div class="dashboard">
+
+  <header class="dashboard__header">
+    <div class="header__eyebrow">Statistiques · Terra Numerica</div>
+    <h1 class="header__title">Analyse des parties</h1>
+    <p class="header__sub">Configurez vos axes pour visualiser les données collectées.</p>
+  </header>
+
+  <div class="query-card" id="stat-form">
+
+    <div class="query-card__section">
+      <span class="axis-label axis-label--y">AXE Y — Mesure</span>
+      <div class="select-group">
+        <label class="select-option" [class.selected]="ordonne === 'Nombre de Tour'">
+          <input type="radio" name="ordonne" value="Nombre de Tour" [(ngModel)]="ordonne" hidden>
+          <span class="select-option__icon">⊞</span>
+          <span class="select-option__text">Nombre de tours</span>
+        </label>
+        <label class="select-option" [class.selected]="ordonne === 'Durée de la Partie'">
+          <input type="radio" name="ordonne" value="Durée de la Partie" [(ngModel)]="ordonne" hidden>
+          <span class="select-option__icon">◷</span>
+          <span class="select-option__text">Durée de partie</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="query-card__divider">
+      <span class="divider__text">en fonction du</span>
+    </div>
+
+    <div class="query-card__section">
+      <span class="axis-label axis-label--x">AXE X — Variable</span>
+      <div class="select-group">
+        <label class="select-option" [class.selected]="abcisse === 'Nombre de Policier'">
+          <input type="radio" name="abcisse" value="Nombre de Policier" [(ngModel)]="abcisse" hidden>
+          <span class="select-option__icon">⬡</span>
+          <span class="select-option__text">Nombre de policiers</span>
+        </label>
+        <label class="select-option" [class.selected]="abcisse === 'Type de Graph'">
+          <input type="radio" name="abcisse" value="Type de Graph" [(ngModel)]="abcisse" hidden>
+          <span class="select-option__icon">◈</span>
+          <span class="select-option__text">Type de graphe</span>
+        </label>
+        <label class="select-option" [class.selected]="abcisse === 'Mode de Jeu'">
+          <input type="radio" name="abcisse" value="Mode de Jeu" [(ngModel)]="abcisse" hidden>
+          <span class="select-option__icon">◉</span>
+          <span class="select-option__text">Mode de jeu</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="query-card__footer" *ngIf="abcisse !== undefined && ordonne !== undefined">
+      <button class="run-btn" (click)="refreshGraph()">
+        <span class="run-btn__label">Générer le graphique</span>
+        <span class="run-btn__arrow">→</span>
+      </button>
+    </div>
+
+  </div>
+
+  <div id="charts" class="charts-zone"></div>
+
+</div>

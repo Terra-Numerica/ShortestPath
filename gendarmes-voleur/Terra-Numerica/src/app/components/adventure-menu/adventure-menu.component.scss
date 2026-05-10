@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Nunito:wght@400;500;600;700&display=swap');
+
+$bg: #f6f4ef;
+$surface: rgba(255, 255, 255, 0.82);
+$surface-strong: rgba(255, 255, 255, 0.95);
+$border: rgba(80, 60, 30, 0.10);
+
+$gold: #d7a928;
+$gold-dim: rgba(215, 169, 40, 0.12);
+$gold-glow: rgba(215, 169, 40, 0.20);
+
+$amber: #d98b1f;
+$text: #2c241c;
+$text-mid: #7c6d5d;
+
+$font-title: 'Playfair Display', Georgia, serif;
+$font-body: 'Nunito', sans-serif;
+
+$radius: 18px;
+$shadow-card: 0 10px 28px rgba(60, 40, 20, 0.08);
+
+::ng-deep body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fbf8f2 0%, #f2ede4 100%);
+  font-family: $font-body;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.adventure-menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 24px 48px;
+  gap: 10px;
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at top left, rgba(217, 139, 31, 0.08), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.06), transparent 24%),
+    linear-gradient(180deg, #fbf8f2 0%, #f2ede4 100%);
+
+  color: $text;
+  font-family: $font-body;
+}
+
+.am-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  &__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.12;
+  }
+
+  &__orb--1 {
+    width: 420px;
+    height: 420px;
+    top: -120px;
+    left: -80px;
+    background: #b38cf0;
+  }
+
+  &__orb--2 {
+    width: 380px;
+    height: 380px;
+    right: -70px;
+    bottom: -70px;
+    background: #f0b24d;
+  }
+
+  &__orb--3 {
+    width: 240px;
+    height: 240px;
+    top: 45%;
+    left: 48%;
+    background: #7ec7e8;
+    transform: translate(-50%, -50%);
+    opacity: 0.08;
+  }
+}
+
+/* ✅ BOUTON RETOUR CORRIGÉ */
+.am-header__back {
+  width: 64px;
+  height: 64px;
+  border: 1.5px solid rgba(26, 22, 18, 0.25);
+  border-radius: 8px;
+  background: #f7f3ed;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(26, 22, 18, 0.06), 0 8px 24px rgba(26, 22, 18, 0.08);
+  transition: all 0.18s ease;
+
+  img {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) saturate(100%) invert(8%) sepia(11%) saturate(870%) hue-rotate(349deg) brightness(94%) contrast(96%);
+  }
+
+  &:hover {
+    background: #fdf0ec;
+    border-color: #c0392b;
+    transform: translateX(-3px);
+  }
+}
+
+.am-header {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 960px;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0 8px;
+
+  &__center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  &__eyebrow {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: $gold;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: $font-title;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: $text;
+  }
+
+  &__spacer {
+    width: 64px;
+    flex-shrink: 0;
+  }
+}
+
+.am-subtitle {
+  margin: 0 0 24px;
+  font-family: $font-title;
+  font-size: 0.92rem;
+  font-style: italic;
+  color: $text-mid;
+}
+
+.am-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.am-card {
+  width: 172px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  background: $surface;
+  border: 1.5px solid $border;
+  border-radius: $radius;
+  box-shadow: $shadow-card;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $gold;
+  }
+
+  &__img {
+    width: 70px;
+  }
+
+  &__name {
+    font-family: $font-title;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+  }
+}
+
+.am-footer {
+  width: 100%;
+  max-width: 600px;
+  padding-top: 24px;
+}
+
+.am-start-btn {
+  width: 100%;
+  padding: 15px;
+  background: $gold;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-family: $font-title;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    background: lighten($gold, 6%);
+  }
+}

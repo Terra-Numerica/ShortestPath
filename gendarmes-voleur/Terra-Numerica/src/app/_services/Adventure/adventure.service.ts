@@ -1,0 +1,112 @@
+import { Injectable } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { Adventure } from 'src/app/models/Adventure/adventure';
+import { ADVENTURES } from 'src/app/models/Adventure/adventures.mock';
+import { Mode } from 'src/app/models/Adventure/mode';
+import Swal from 'sweetalert2';
+import { GameService } from '../game/game.service';
+import { GraphService } from '../graph/graph.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AdventureService {
+
+  private adventures: Adventure[] = ADVENTURES;
+  private currentAdventure: Adventure = null;
+
+  constructor(
+    private router: Router,
+    private gameService: GameService,
+    private graphService: GraphService
+  ) {}
+
+  getAvailableAdventures() {
+    return this.adventures;
+  }
+
+  launchAdventure(adventure: Adventure) {
+    this.currentAdventure = adventure;
+    this.currentAdventure.reset();
+
+    this.gameService.setAdventure(this.currentAdventure);
+    this.gameService.setIsAdventure(true);
+    this.gameService.setEndLevelCallback(this.launchNextLevel.bind(this));
+
+    this.launchNextLevel();
+  }
+
+  async launchNextLevel() {
+    const extras = await this.configureAdventureNextLevel(this.currentAdventure);
+
+    if (extras) {
+      const role = this.getLevelPlayerRole();
+      const message = `Dans ce niveau vous jouerez le rôle du camp ${role}. <br>Le voleur a une vitesse de ${this.currentAdventure.getCurrentLevel().getThiefSpeed()}`;
+
+      await Swal.fire({
+        html: message
+      });
+
+      this.router.navigate(['/board'], extras);
+      return false;
+    } else {
+      this.gameService.setIsAdventure(false);
+      this.router.navigate(['/adventure-menu']);
+      return true;
+    }
+  }
+
+  private async configureAdventureNextLevel(adventure: Adventure): Promise<NavigationExtras> {
+    const level = this.currentAdventure.getCurrentLevel();
+    let extras: NavigationExtras = undefined;
+
+    if (level !== undefined) {
+      this.gameService.reset();
+
+      await this.graphService.generateGraph(
+        level.getGraphType(),
+        level.getGraphParams()
+      );
+
+      this.gameService.setOpponentType('ai');
+      this.gameService.setCopsNumber(level.getCopsNumber());
+      this.gameService.setThiefSpeed(level.getThiefSpeed());
+      this.gameService.setAiSide(level.getAiSide());
+      this.gameService.setGameMode(level.getDifficulty());
+
+      extras = {
+        queryParams: {
+          gameMode: level.getDifficulty(),
+          adventure: true
+        }
+      };
+
+      return extras;
+    }
+
+    return undefined;
+  }
+
+  getAdventureMode(): Mode {
+    return this.currentAdventure.getMode();
+  }
+
+  getCurrentLevelMediation() {
+    return this.currentAdventure.getMediationInfo();
+  }
+
+  getLevelPlayerRole() {
+    return this.currentAdventure.getCurrentLevel().getPlayerRoleName();
+  }
+
+  async goToNextLevel() {
+    const res = await this.currentAdventure.goToNextLevel();
+
+    if (res) {
+      this.gameService.setIsAdventure(false);
+      this.router.navigate(['/adventure-menu']);
+    } else {
+      return true;
+    }
+  }
+}
