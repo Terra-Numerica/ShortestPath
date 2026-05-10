@@ -2,4 +2,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   base: '/ShortestPath/',
+  build: {
+    outDir: 'docs'
+  }
 })
