@@ -1,0 +1,58 @@
+{
+  "name": "web-surfeur",
+  "version": "0.0.0",
+  "main": "main.js",
+  "scripts": {
+    "ng": "ng",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && ng build",
+    "build:prod": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --prod --base-href http://www-sop.inria.fr/members/Gregory.Hoareau/WebSurfeur/",
+    "build:gh-pages": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --prod --base-href /WebSurfeur/",
+    "deploy": "npm run build:gh-pages && copy dist\\chevre-choux\\index.html dist\\chevre-choux\\404.html && cd dist/chevre-choux && git init && git add . && git commit -m \"Deploy to GitHub Pages\" && git push --force https://github.com/Terra-Numerica/WebSurfeur.git master:gh-pages",
+    "start:electron": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --base-href ./ && electron .",
+    "build:electron": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --base-href ./ && electron-builder"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~11.0.0",
+    "@angular/common": "~11.0.0",
+    "@angular/compiler": "~11.0.0",
+    "@angular/core": "~11.0.0",
+    "@angular/forms": "~11.0.0",
+    "@angular/platform-browser": "~11.0.0",
+    "@angular/platform-browser-dynamic": "~11.0.0",
+    "@angular/router": "~11.0.0",
+    "@types/d3": "^6.2.0",
+    "@types/three": "^0.125.0",
+    "assert-plus": "^1.0.0",
+    "d3": "^6.2.0",
+    "events": "^3.3.0",
+    "rxjs": "~6.6.0",
+    "sweetalert2": "^11.0.12",
+    "three": "^0.125.0",
+    "tslib": "^2.0.0",
+    "zone.js": "~0.10.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.1100.1",
+    "@angular/cli": "~11.0.1",
+    "@angular/compiler-cli": "~11.0.0",
+    "@types/node": "^12.11.1",
+    "electron": "^13.0.1",
+    "electron-builder": "^22.10.5",
+    "ts-node": "~8.3.0",
+    "typescript": "~4.0.2"
+  },
+  "build": {
+    "appId": "com.TerraNumerica.webSurfeur",
+    "productName": "Terra Numerica - Web Surfeur",
+    "target": "NSIS",
+    "directories": {
+      "output": "build"
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false
+    }
+  }
+}
