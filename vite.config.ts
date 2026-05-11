@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/ShortestPath/',
+  base: '/GraphLab2/',
   build: {
     outDir: 'docs'
   }
